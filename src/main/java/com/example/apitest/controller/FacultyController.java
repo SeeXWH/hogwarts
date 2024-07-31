@@ -6,6 +6,7 @@ import com.example.apitest.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,25 +21,27 @@ public class FacultyController {
 
 
     @GetMapping("{id}")
-    public Faculty getFaculty(@PathVariable Long id){
+    public Faculty getFaculty(@PathVariable Long id) {
         return facultyService.findFaculty(id);
     }
+
     @PostMapping
-    public Faculty addFaculty(Faculty faculty){
+    public Faculty addFaculty(Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
 
     @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable Long id){
-        return facultyService.deleteFaculty(id);
+    public void deleteFaculty(@PathVariable Long id) {
+        facultyService.deleteFaculty(id);
     }
+
     @PutMapping
-    public Faculty putFaculty(Faculty faculty){
+    public Faculty putFaculty(Faculty faculty) {
         return facultyService.editFaculty(faculty);
     }
 
     @GetMapping()
-    public Map<Long, Faculty> getAllFaculty(){
+    public List<Faculty> getAllFaculty() {
         return facultyService.getAllFaculty();
     }
 

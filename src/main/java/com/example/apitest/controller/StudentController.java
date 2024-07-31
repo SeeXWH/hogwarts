@@ -5,6 +5,7 @@ import com.example.apitest.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,8 +28,8 @@ public class StudentController {
     }
 
     @DeleteMapping("{id}")
-    public Student deleteStudent(@PathVariable Long id){
-        return studentService.deleteStudent(id);
+    public void deleteStudent(@PathVariable Long id){
+        studentService.deleteStudent(id);
     }
     @PutMapping
     public Student putStudent(Student student){
@@ -36,7 +37,7 @@ public class StudentController {
     }
 
     @GetMapping()
-    public Map<Long, Student> getAllStudent(){
+    public List<Student> getAllStudent(){
         return studentService.getAllStudent();
     }
 }

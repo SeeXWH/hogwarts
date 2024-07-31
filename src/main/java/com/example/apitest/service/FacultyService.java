@@ -1,36 +1,39 @@
 package com.example.apitest.service;
 
 import com.example.apitest.model.Faculty;
-import com.example.apitest.model.Student;
+import com.example.apitest.repository.FacultyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class FacultyService {
-    private final Map<Long, Faculty> facultyLongMap = new HashMap<>();
-    private long lastId = 0;
+    @Autowired
+    private final FacultyRepository facultyRepository;
+
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public Faculty createFaculty(Faculty faculty){
-        faculty.setId(++lastId);
-        facultyLongMap.put(faculty.getId(), faculty);
-        return faculty;
+        return facultyRepository.save(faculty);
+
     }
 
     public Faculty findFaculty(long id){
-        return facultyLongMap.get(id);
+        return facultyRepository.findById(id).get();
     }
 
     public Faculty editFaculty(Faculty faculty){
-        facultyLongMap.put(faculty.getId(), faculty);
-        return faculty;
+        return facultyRepository.save(faculty);
     }
 
-    public Faculty deleteFaculty(long id){
-        return facultyLongMap.remove(id);
+    public void deleteFaculty(long id){
+        facultyRepository.deleteById(id);
     }
-    public Map<Long, Faculty> getAllFaculty(){
-        return facultyLongMap;
+    public List<Faculty> getAllFaculty(){
+        return facultyRepository.findAll();
     }
 }
