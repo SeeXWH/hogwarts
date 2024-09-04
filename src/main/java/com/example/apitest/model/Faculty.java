@@ -1,19 +1,24 @@
 package com.example.apitest.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
 @Entity
 public class Faculty {
+    @Id
+    @GeneratedValue
     private long id = 0L;
     private String name;
     private String color;
 
-    public Faculty(String name, String color) {
+    public Faculty(String name, String color, long id) {
         this.name = name;
         this.color = color;
-        this.id += 1;
+        this.id += id;
     }
+    public Faculty(){}
 
     public long getId() {
         return id;

@@ -1,19 +1,25 @@
 package com.example.apitest.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
 @Entity
 public class Student {
+    @Id
+    @GeneratedValue
     private long id = 0L;
     private String name;
     private int age;
 
-    public Student(String name, int age) {
+    public Student(String name, int age, long id) {
         this.name = name;
         this.age = age;
-        this.id +=1;
+        this.id = id;
     }
+
+    public Student(){}
 
     public Long getId() {
         return id;
